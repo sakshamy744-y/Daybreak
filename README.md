@@ -10,28 +10,14 @@ Both versions are built for mobile first and keep your plan on your own device.
 ---
 
 ## Preview
+<p>
+    <img src="Screenshot/Main.jpg" width="220">
+    <img src="Screenshot/widgets.jpg" width="220">
+    <img src="Screenshot/theam.jpg" width="220">
+   <img src="Screenshot/Add_page.jpg" width="220">
+  </p>
 
-```
-┌──────────────────────────────┐
-│ ☀ Daybreak        Guide      │
-│                              │
-│  ┌────┐  ┌────┐  ┌────────┐  │
-│  │Add │  │Day │  │Function│  │
-│  └────┘  └────┘  └────────┘  │
-│                              │
-│  Thu 22 Oct                  │
-│  ──────────────────────────  │
-│  ◉ Wake up        9:00 AM    │
-│  ○ Maths, physics 4:00 PM    │
-│       ▸ Details              │
-│  ○ Sleep          8:00 PM    │
-│                              │
-│  ▓▓▓▓▓▓░░░░░░  1 of 3 done   │
-│                              │
-│  ━━━━━  (drag up for note)   │
-└──────────────────────────────┘
-```
-
+  
 *A simple sketch of the Day screen. Replace it with a real screenshot by adding `docs/screenshot.png` to the repository and using `![Daybreak](docs/screenshot.png)`.*
 
 ---
