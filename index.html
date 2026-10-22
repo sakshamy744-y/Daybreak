@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Daybreak Planner</title>
+<meta name="description" content="Turn a task summary into a timed daily schedule with reminders, per-date steps and weekday scheduling.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#F2F4F9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0B111F" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Daybreak">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="lhs">
+      <button type="button" id="sideToggle" class="sidetoggle" aria-controls="addPanel" aria-expanded="true" aria-label="Hide the add panel" title="Hide the add panel"></button>
+      <div class="brand">
+        <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 22a11 11 0 0 1 22 0z" fill="currentColor"/><path d="M2 26h28" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/><path d="M16 4v4M5.5 9.5l2.8 2.8M26.5 9.5l-2.8 2.8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"/></svg>
+        <span>Daybreak</span>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Views" id="tabs"></nav>
+  </header>
+
+  <div class="shell" id="shell" data-view="day">
+    <section class="add panel" id="addPanel" aria-labelledby="add-h">
+      <h2 id="add-h">Add tasks</h2>
+      <p class="lead">Paste a whole schedule or type a single task. Time ranges (“4:20 to 6:10”), lengths (“+2 hr”), comma lists and a “total” line are read for you.</p>
+      <label class="field-label" for="summary">Task summary</label>
+      <textarea id="summary" class="summary" spellcheck="false" rows="12"></textarea>
+      <span class="field-label" id="days-l">Show on</span>
+      <div class="chips" id="addDays" role="group" aria-labelledby="days-l"></div>
+      <div class="presets" id="presets"></div>
+      <div class="actions">
+        <button type="button" id="btnReplace" class="btn primary">Replace my plan</button>
+        <button type="button" id="btnAppend" class="btn">Add to plan</button>
+        <button type="button" id="btnSample" class="btn quiet">Use example</button>
+      </div>
+      <div class="prev" id="preview" aria-live="polite"></div>
+      <p class="fine">Your plan and ticks are saved on this device only.</p>
+    </section>
+    <main class="main" id="main"></main>
+  </div>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="alerts" class="alerts"></div>
+<noscript>Daybreak Planner needs JavaScript to run.</noscript>
+<script src="js/app.js"></script>
+</body>
+</html>
