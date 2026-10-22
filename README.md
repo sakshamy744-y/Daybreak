@@ -95,7 +95,7 @@ Your plan, ticks and notes are saved **only on your device**. Daybreak has no ac
 
 ## Credits
 
-***Saksham yadav*** \n
+***Saksham yadav*** <br>
 YouTube : @Dev_Book1 *or* <https://youtube.com/@Dev_Book1>
 
 
