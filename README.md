@@ -89,19 +89,13 @@ Download the newer `.apk` from the latest release and install it over the old on
 
 ---
 
-## Build it yourself
-
-1. Download the project and open the `DaybreakPlanner` folder in **Android Studio**.
-2. Let Gradle sync, connect a phone or start an emulator, then press **Run**.
-
-Requirements: Android 8.0 (API 26) or newer.
-
----
-
 ## Privacy
 
 Your plan, ticks and notes are saved **only on your device**. Daybreak has no account and does not send your data anywhere.
 
 ## Credits
 
-Fonts: Bricolage Grotesque, DM Sans and IBM Plex Mono (SIL Open Font License).
+***Saksham yadav***
+YouTube : @Dev_Book1 *or* <https://youtube.com/@Dev_Book1>
+
+
