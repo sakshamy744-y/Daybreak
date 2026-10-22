@@ -54,7 +54,7 @@ Open the site for this repository (GitHub Pages, if enabled under **Settings →
 
 1. **Open the repository** on your Android phone: <https://github.com/sakshamy744-y/Daybreak>
 2. On the right side of the page (or under the repository name on mobile), tap **Releases**, then the **latest** release at the top.
-   Direct link: <https://github.com/sakshamy744-y/Daybreak/releases/latest>
+   Direct link: <https://github.com/sakshamy744-y/Daybreak/releases/download/Daybreak_v1.0>
 3. Scroll to **Assets** and tap the file ending in **`.apk`** to download it.
 4. If Android warns that the file type can harm your device, tap **Download anyway**.
 5. When the download finishes, tap **Open** (or open it from your **Downloads** folder).
