@@ -46,6 +46,8 @@ Both versions are built for mobile first and keep your plan on your own device.
 
 Open the site for this repository (GitHub Pages, if enabled under **Settings → Pages**). In your phone browser you can choose **Add to Home screen** / **Install app** to use it like an app.
 
+<img src="Screenshot/webapp.png" width="220">
+
 ---
 
 ## Download the Android app from Releases
