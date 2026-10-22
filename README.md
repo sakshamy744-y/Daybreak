@@ -1,88 +1,107 @@
-# Daybreak Planner (PWA)
+# Daybreak
 
-Turn a task summary into a timed daily schedule. Pick which weekdays each task shows on, keep per-date steps and notes, and get reminders when a task is about to start.
+**Daybreak is an app as well as a website.** Type or paste your tasks in plain words, and Daybreak turns them into a timed daily schedule with reminders.
 
-Plain HTML, CSS and JavaScript. No build step, no dependencies.
+- 🌐 **Website:** the original web app (PWA) in this repository, which runs in any browser and can be installed to your home screen.
+- 📱 **Android app:** a native app (Kotlin + Jetpack Compose) published as a file in this repository's **Releases**.
 
-## Run it
+Both versions are built for mobile first and keep your plan on your own device.
 
-A service worker only runs on **https** or **localhost**, so do not open `index.html` by double-clicking it. Serve the folder instead:
+---
 
-```bash
-cd daybreak-planner-pwa
-python3 -m http.server 8080
-# then open http://localhost:8080
-```
-
-(Any static server works: `npx serve`, VS Code Live Server, and so on.)
-
-## Put it online (free)
-
-Upload the whole folder to any static host. All of these give you https automatically:
-
-- Netlify: drag the folder onto app.netlify.com/drop
-- GitHub Pages: push the folder to a repo, then Settings → Pages
-- Cloudflare Pages or Vercel: import the repo or upload the folder
-
-The app uses relative paths, so it also works from a sub-folder (for example `https://you.github.io/daybreak/`).
-
-## Install it
-
-- **Android / Chrome / Edge:** open the hosted link, then use the Install button on the Alerts tab (or the browser menu → Install app).
-- **iPhone / iPad (Safari):** Share → Add to Home Screen.
-- **Desktop Chrome / Edge:** the install icon in the address bar.
-
-Once installed it opens like a normal app and works offline.
-
-## Several apps on one GitHub account (important)
-
-All GitHub Pages repos share one origin (`yourname.github.io`). Browsers decide whether two PWAs are "the same app" from the manifest **`id`**, not from the folder. If the id is `./` or missing, it can resolve to the site root, and then installing or opening one app opens or replaces another.
-
-This project avoids that:
-
-- `manifest.webmanifest` has a unique `"id": "daybreak-planner-7f3a9c"`.
-- `scope` and `start_url` are relative (`./`), so they follow whatever repo folder the app is hosted in.
-- Service worker caches are named after the app's own scope, so apps on the same domain never clear each other's files.
-
-Rules for every PWA you host on the same domain:
-
-1. Give each one a different `id` in its manifest (for example `"id": "my-other-app-1b2c3d"`).
-2. Keep `scope` and `start_url` relative, inside that app's own folder.
-3. Use a different `localStorage` key and cache name in each app.
-
-**If you already installed the earlier version:** uninstall it first (Chrome: `chrome://apps` → right-click → Remove, or the app's menu → Uninstall), then open the site and install again. The identity changed, so the browser treats this as a new app.
-
-## Now widget
-
-- **Now tab:** the current task, time left, and what is next. Tick it off from there.
-- **Mini window (desktop Chrome / Edge):** a small always-on-top window with the same card. It stays visible over other apps. In browsers without that feature it opens a small popup window instead.
-- **Launch shortcut:** installed app → right-click the icon (or long-press on Android) → **Now** opens straight to the card. Pin it as a small window next to your work.
-- **Phone:** web apps cannot place a widget on the home screen. Turn on **Alerts → Current task in notifications** and a silent notification shows what you should be doing now. It updates while the app is running.
-
-## Add panel on desktop
-
-The `<` / `>` button at the top left hides or shows the add panel. The choice is remembered.
-
-## Reminders: what to expect
-
-- Reminders fire while the app is open, including an installed app that is running in the background. Open the **Alerts** tab to set how early to be warned, turn the sound on or off, and allow system notifications.
-- Browsers do not let any web app wake itself up at a set time after it has been fully closed. Keep the app open on your laptop, or set a phone alarm for the tasks that matter most.
-- System notifications need permission, and on iPhone they only work for the app installed to the Home Screen (iOS 16.4 or later).
-
-## Files
+## Preview
 
 ```
-index.html              page shell, manifest and icon links
-css/app.css             all styles (light and dark themes follow the device)
-js/app.js               task parser, views, reminders, install prompt
-sw.js                   offline cache + notification click handling
-manifest.webmanifest    name, colours, icons, shortcuts
-icons/                  192, 512, maskable 512, Apple touch icon, favicon
+┌──────────────────────────────┐
+│ ☀ Daybreak        Guide      │
+│                              │
+│  ┌────┐  ┌────┐  ┌────────┐  │
+│  │Add │  │Day │  │Function│  │
+│  └────┘  └────┘  └────────┘  │
+│                              │
+│  Thu 22 Oct                  │
+│  ──────────────────────────  │
+│  ◉ Wake up        9:00 AM    │
+│  ○ Maths, physics 4:00 PM    │
+│       ▸ Details              │
+│  ○ Sleep          8:00 PM    │
+│                              │
+│  ▓▓▓▓▓▓░░░░░░  1 of 3 done   │
+│                              │
+│  ━━━━━  (drag up for note)   │
+└──────────────────────────────┘
 ```
 
-## Changing things
+*A simple sketch of the Day screen. Replace it with a real screenshot by adding `docs/screenshot.png` to the repository and using `![Daybreak](docs/screenshot.png)`.*
 
-- After editing any cached file (`index.html`, `css/`, `js/`, `icons/`, the manifest), change the `:v2` suffix of `VERSION` at the top of `sw.js` (for example `:v3`). Installed copies then pick up the update on their next visit.
-- Do not change the manifest `id` once people have installed the app. A new id is a new app.
-- Your plan, ticks and settings are stored in the browser's `localStorage` under the key `daybreak.planner.v1`. They stay on that device and browser.
-- Changing the example text: edit the `SAMPLE` constant in `js/app.js`.
+---
+
+## What it does
+
+- **Write tasks naturally.** Examples: `wake up at 6`, `maths, physics 4 pm +2 hr`, `4:20 to 6:10 revision`.
+- **Add one task at a time.** On the Add tab, tap the round **+** button, give the task a title, pick a time (an end time is optional), and tap **Add task**.
+- **Day view** with a progress bar and an animated tick when you complete a task, plus a soft sound and haptic feedback.
+- **Reminders in the background**, even when the app is closed, plus an ongoing "current task" notification with a countdown.
+- **Notes for every day.** Drag up the thin line at the bottom of the screen.
+- **Lock-screen and home-screen widgets** (Android): Now, Today, Clock, Ring, Countdown and Week, each with a live preview in the **Function** tab.
+- **Themes.** Light, Dark or System, plus five accent colours, applied to the app and the widgets.
+- **First-time guide** that explains every tab and how to write tasks. Reopen it any time from **Guide**.
+
+### Tabs
+
+| Tab | Purpose |
+|---|---|
+| **Add** | Paste a schedule or add a single task with **+** |
+| **Day** | See, tick and edit the tasks for each day |
+| **Function** | Reminders, widgets, feel (haptics and sound), reliability tips and appearance |
+
+---
+
+## Use the website
+
+Open the site for this repository (GitHub Pages, if enabled under **Settings → Pages**). In your phone browser you can choose **Add to Home screen** / **Install app** to use it like an app.
+
+---
+
+## Download the Android app from Releases
+
+1. **Open the repository** on your Android phone: <https://github.com/sakshamy744-y/Daybreak>
+2. On the right side of the page (or under the repository name on mobile), tap **Releases**, then the **latest** release at the top.
+   Direct link: <https://github.com/sakshamy744-y/Daybreak/releases/latest>
+3. Scroll to **Assets** and tap the file ending in **`.apk`** to download it.
+4. If Android warns that the file type can harm your device, tap **Download anyway**.
+5. When the download finishes, tap **Open** (or open it from your **Downloads** folder).
+6. If asked, tap **Settings** and turn on **Allow from this source** for your browser or file manager, then go back and tap **Install**.
+7. Tap **Open**. The first-time guide starts automatically.
+8. Allow **Notifications** when asked.
+
+### For reliable reminders
+
+Some phones stop background apps to save battery. If reminders arrive late:
+
+1. Go to **Settings → Apps → Daybreak → Battery** and choose **Unrestricted** (or turn off battery optimisation).
+2. Allow **Alarms & reminders** for Daybreak if your phone offers that setting.
+3. Open the **Function** tab and use **Send test notification** to check it works.
+
+### Updating
+
+Download the newer `.apk` from the latest release and install it over the old one. Your plan and notes are kept.
+
+---
+
+## Build it yourself
+
+1. Download the project and open the `DaybreakPlanner` folder in **Android Studio**.
+2. Let Gradle sync, connect a phone or start an emulator, then press **Run**.
+
+Requirements: Android 8.0 (API 26) or newer.
+
+---
+
+## Privacy
+
+Your plan, ticks and notes are saved **only on your device**. Daybreak has no account and does not send your data anywhere.
+
+## Credits
+
+Fonts: Bricolage Grotesque, DM Sans and IBM Plex Mono (SIL Open Font License).
