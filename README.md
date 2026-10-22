@@ -14,7 +14,6 @@ Both versions are built for mobile first and keep your plan on your own device.
     <img src="Screenshot/Main.jpg" width="220">
     <img src="Screenshot/widgets.jpg" width="220">
     <img src="Screenshot/theam.jpg" width="220">
-   <img src="Screenshot/Add_page.jpg" width="220">
   </p>
 
   
